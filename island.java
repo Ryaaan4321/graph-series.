@@ -23,13 +23,13 @@ public class island {
         int m = grid[0].length;
 
         while (!q.isEmpty()) {
-            int row = q.peek().first;
+            int row = q.peek().first;// stored the value of that particlar node into  this row and col variable;
             int col = q.peek().second;
             q.remove();
 
             for (int delrow = -1; delrow <= 1; delrow++) {
                 for (int delcol = -1; delcol <= 1; delcol++) {
-                    int nrow = row + delrow;
+                    int nrow = row + delrow;// now traversing for there neighbour row and neighbour col
                     int ncol = col + delcol;
 
                     if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && grid[nrow][ncol] == '1'
