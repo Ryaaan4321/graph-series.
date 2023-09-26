@@ -1,6 +1,6 @@
 package graphh;
 
-public class floodfill {
+ public class floodfill {
     public static int[][] floodfil(int[][] image, int sr, int sc, int newColour) {
         int iniColour = image[sr][sc];
         int[][] ans = new int[image.length][image[0].length]; // Create a new array for the result
