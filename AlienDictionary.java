@@ -7,7 +7,7 @@ public class AlienDictionary {
         int indegree[] = new int[v];
         for (int i = 0; i < v; i++) {
             for (int it : adj.get(i)) {
-                indegree[i]++;
+                indegree[it]++;
             }
         }
         Queue<Integer> q = new LinkedList<>();
@@ -29,25 +29,42 @@ public class AlienDictionary {
         return topo;
     }
 
-    public static void main(String[] args) {
-        int v = 4; 
-        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-
-        
-        for (int i = 0; i < v; i++) {
+    public static String findOrder(String[] dict, int v, int k) {
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>(k);
+        for (int i = 0; i < k; i++) {
             adj.add(new ArrayList<>());
         }
 
-        
-        adj.get(0).add(1);
-        adj.get(0).add(2);
-        adj.get(1).add(3);
-        adj.get(2).add(3);
+        for (int i = 0; i < v - 1; i++) {
+            String s1 = dict[i];
+            String s2 = dict[i + 1];
+            int len = Math.min(s1.length(), s2.length());
+            for (int ptr = 0; ptr < len; ptr++) {
+                if (s1.charAt(ptr) != s2.charAt(ptr)) {
+                    adj.get(s1.charAt(ptr) - 'a').add(s2.charAt(ptr) - 'a');
+                    break;
+                }
+            }
+        }
 
-        ArrayList<Integer> topologicalOrder = topoSort(v, adj);
+        ArrayList<Integer> topo = topoSort(k, adj);
+        StringBuilder ans = new StringBuilder();
+        for (int it : topo) {
+            ans.append((char) (it + 'a'));
+        }
 
-        
-        System.out.println("Topological Order: " + topologicalOrder);
+        return ans.toString();
+    }
+
+    public static void main(String[] args) {
+        String[] dict = {"wrt", "wrf", "er", "ett", "rftt"};
+        int v = dict.length; 
+        int k = 26; 
+
+        String order = findOrder(dict, v, k);
+        System.out.println("Alien Dictionary Order: " + order);
     }
 }
+
+
 
