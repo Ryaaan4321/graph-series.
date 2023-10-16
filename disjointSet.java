@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class disjointSet {
     ArrayList<Integer> rank = new ArrayList<>();
     ArrayList<Integer> parent = new ArrayList<>();
+    ArrayList<Integer> size = new ArrayList<>();
 
     public disjointSet(int n) {
         for (int i = 0; i <= n; i++) {
@@ -36,7 +37,21 @@ public class disjointSet {
         }
 
     }
-  // dont panic disjoint set is not a childs play take time and try to understand it again..
+
+    public void unionBysize(int u, int v) {
+        int ulp_u = findPar(u);
+        int ulp_v = findPar(v);
+        if (ulp_u == ulp_v)
+            return;
+
+        if (size.get(ulp_u) < size.get(ulp_v)) {
+            parent.set(ulp_u, ulp_v);
+            size.set(ulp_v, size.get(ulp_v) + size.get(ulp_u));
+        } else {
+            parent.set(ulp_v, ulp_u);
+            size.set(ulp_v, size.get(u) + size.get(ulp_v));
+        }
+    }
 
     public static void main(String[] args) {
         disjointSet ds = new disjointSet(7);
