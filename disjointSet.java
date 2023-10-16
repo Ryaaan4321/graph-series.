@@ -52,6 +52,14 @@ public class disjointSet {
             size.set(ulp_v, size.get(u) + size.get(ulp_v));
         }
     }
+   
+    
+    /*
+    dont panic darling its okk disjoint set is not a cup of cake to understand 
+    take ur time and read about it again and u will get to understand all the concepts by time..
+    give it some time thats it 
+    
+      */
 
     public static void main(String[] args) {
         disjointSet ds = new disjointSet(7);
